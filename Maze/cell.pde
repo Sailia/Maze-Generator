@@ -64,5 +64,11 @@ class Cell {
      if (this.walls[3])  {
         line(x    , y + w, x    , y); 
      }
+     
+     if (this.visited)  {
+        noStroke();
+        fill(255, 0, 255, 100);
+        rect(x, y, w, w);
+     }
   }
 }

@@ -26,6 +26,32 @@ void draw()  {
   for(int i = 0; i < grid.size(); i++)  {
      grid.get(i).show();  
   }
+  
+  current.visited = true;
+  current.highlight();
+  
+  // Step 1
+  Cell next = current.checkNeighbours();
+  if (next != null)  {
+     next.visited = true;
+     
+     // Step 2
+     stack.add(current);
+     
+     // Step 3
+     removeWalls(current, next);
+  }
+}
+
+void removeWalls(Cell a, Cell b)  {
+   int x = a.col - b.col;
+   if (x == 1)  {
+      a.walls[3] = false;
+      b.walls[1] = false;
+   } else if (x == -1)  {
+      a.walls[1] = false;
+      b.walls[3] = false;
+   }
 }
 
 int index(int col, int row)  {
