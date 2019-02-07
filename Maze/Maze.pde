@@ -23,10 +23,18 @@ void setup()  {
 
 void draw()  {
   background(51);
-  for(int index; index < grid.size(); index++)  {
-     grid.get(index).show();  
+  for(int i = 0; i < grid.size(); i++)  {
+     grid.get(i).show();  
   }
 }
+
+int index(int col, int row)  {
+   if (col < 0 || row < 0 || col > cols-1 || row > rows-1)  {
+      return 0;
+   }  
+   return col + row * cols;
+}
+
 
 
 

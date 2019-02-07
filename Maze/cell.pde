@@ -18,6 +18,26 @@ class Cell {
     Cell right = grid.get(index(col+1, row));
     Cell bottom = grid.get(index(col, row+1));
     Cell left = grid.get(index(col, row-1));
+    
+    if (top != null && !top.visited)  {
+       neighbours.add(top); 
+    }
+    if (right != null && !right.visited)  {
+       neighbours.add(right); 
+    }
+    if (bottom != null && !bottom.visited)  {
+        neighbours.add(bottom);
+    }
+    if (left != null && !left.visited)  {
+       neighbours.add(left); 
+    }
+    //review below if statement
+    if (neighbours.size() > 0 )  {
+       int r = floor(random(0, neighbours.size()));
+       return neighbours.get(r);
+    } else {
+       return null;
+    }
   }
   
   void highlight()  {
@@ -25,6 +45,24 @@ class Cell {
      int y = this.row*w; //scaled up to how big the squares are
      noStroke();
      fill(0,0,255,100);
-     rect(x,y,w,w);
+     rect(x, y, w, w); //create rectangle at that location and at that size
+  }
+  
+  void show()  {
+     int x = this.col*w;
+     int y = this.row*w;
+     stroke(255);
+     if (this.walls[0])  {
+        line(x    , y    , x + w, y); //draw the top line of the cell 
+     }
+     if (this.walls[1])  {
+        line(x + w, y    , x + w, y + w); 
+     }
+     if (this.walls[2])  {
+        line(x + w, y + w, x    , y + w); 
+     }
+     if (this.walls[3])  {
+        line(x    , y + w, x    , y); 
+     }
   }
 }
