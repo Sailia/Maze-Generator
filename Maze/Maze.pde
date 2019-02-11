@@ -1,7 +1,6 @@
-ArrayList<Cell> grid = new ArrayList<Cell>();
 int cols, rows, w = 20;
+ArrayList<Cell> grid = new ArrayList<Cell>();
 Cell cell;
-
 Cell current;
 
 ArrayList<Cell> stack = new ArrayList<Cell>();
@@ -40,7 +39,19 @@ void draw()  {
      
      // Step 3
      removeWalls(current, next);
+     
+     //Step 4
+     current = next;
+  } else if (stack.size() > 0) {
+    current = stack.remove(stack.size()-1);
   }
+}
+
+int index(int col, int row)  {
+   if (col < 0 || row < 0 || col > cols-1 || row > rows-1)  {
+      return 0;
+   }  
+   return col + row * cols;
 }
 
 void removeWalls(Cell a, Cell b)  {
@@ -52,14 +63,17 @@ void removeWalls(Cell a, Cell b)  {
       a.walls[1] = false;
       b.walls[3] = false;
    }
+   int y = a.row - b.row;
+   if (y == 1)  {
+      a.walls[0] = false;
+      b.walls[2] = false;
+   } else if (y == -1)  {
+      a.walls[2] = false;
+      b.walls[0] = false;
+   }
 }
 
-int index(int col, int row)  {
-   if (col < 0 || row < 0 || col > cols-1 || row > rows-1)  {
-      return 0;
-   }  
-   return col + row * cols;
-}
+
 
 
 

@@ -17,7 +17,7 @@ class Cell {
     Cell top = grid.get(index(col, row-1)); 
     Cell right = grid.get(index(col+1, row));
     Cell bottom = grid.get(index(col, row+1));
-    Cell left = grid.get(index(col, row-1));
+    Cell left = grid.get(index(col-1, row));
     
     if (top != null && !top.visited)  {
        neighbours.add(top); 
